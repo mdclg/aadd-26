@@ -4,9 +4,13 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import repositorio.Identificable;
+import utils.LocalDateTimeAdapter;
 
-
+@XmlRootElement // anotación JAXB
 public class Encuesta implements Identificable {
 	
 	private String id;
@@ -58,13 +62,14 @@ public class Encuesta implements Identificable {
 		this.instrucciones = instrucciones;
 	}
 	
+	@XmlJavaTypeAdapter(value=LocalDateTimeAdapter.class) // anotación JAXB
 	public LocalDateTime getApertura() {
 		return apertura;
 	}
 	public void setApertura(LocalDateTime apertura) {
 		this.apertura = apertura;
 	}
-	
+	@XmlJavaTypeAdapter(value=LocalDateTimeAdapter.class) // anotación JAXB
 	public LocalDateTime getCierre() {
 		return cierre;
 	}

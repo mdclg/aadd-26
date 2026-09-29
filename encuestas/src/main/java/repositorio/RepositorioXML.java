@@ -1,6 +1,9 @@
 package repositorio;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -80,6 +83,76 @@ public abstract class RepositorioXML<T extends Identificable> implements Reposit
 
 	/*** Fin métodos de apoyo ***/
 
-	
+	@Override
+	public String add(T entity) throws RepositorioException {
+		String id = UUID.randomUUID().toString();
+
+		entity.setId(id);
+		save(entity);
+
+		return id;
+	}
+
+	@Override
+	public void update(T entity) throws RepositorioException, EntidadNoEncontrada {
+		if (!checkDocumento(entity.getId()))
+			throw new EntidadNoEncontrada("La entidad no existe, id: " + entity.getId());
+
+		save(entity);
+	}
+
+	@Override
+	public void delete(T entity) throws RepositorioException, EntidadNoEncontrada {
+		if (!checkDocumento(entity.getId()))
+			throw new EntidadNoEncontrada("La entidad no existe, id: " + entity.getId());
+
+		final String documento = getDocumento(entity.getId());
+
+		File fichero = new File(documento);
+
+		fichero.delete();
+
+	}
+
+	@Override
+	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
+		return load(id);
+	}
+
+	@Override
+	public List<T> getAll() throws RepositorioException {
+		LinkedList<T> resultado = new LinkedList<T>();
+
+		for (String id : getIds()) {
+			
+			try {
+				resultado.add(load(id));
+			} catch (EntidadNoEncontrada e) {
+				// no debería suceder
+				e.printStackTrace();
+			}
+		}
+		
+		return resultado;
+	}
+
+	@Override
+	public List<String> getIds() throws RepositorioException {
+		LinkedList<String> resultado = new LinkedList<>();
+
+		File directorio = new File(DIRECTORIO);
+
+		File[] entidades = directorio.listFiles(f -> f.isFile() && f.getName().endsWith(".xml"));
+
+		final String prefijo = getClase().getSimpleName() + "-";
+		for (File file : entidades) {
+
+			String id = file.getName().substring(prefijo.length(), file.getName().length() - 4);
+
+			resultado.add(id);
+		}
+
+		return resultado;
+	}
 
 }
