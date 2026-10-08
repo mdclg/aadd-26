@@ -4,25 +4,41 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import repositorio.Identificable;
 import utils.LocalDateTimeAdapter;
 
 @XmlRootElement // anotación JAXB
+@Entity
 public class Encuesta implements Identificable {
 	
+	@Id
+	@GeneratedValue(generator="uuid")
+	@GenericGenerator(name="uuid", strategy="uuid2")
 	private String id;
 	
 	private String titulo;
+	@Lob
 	private String instrucciones;
 	
 	private LocalDateTime apertura;
 	
 	private LocalDateTime cierre;
-	
-	private LinkedList<Opcion> opciones = new LinkedList<>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "encuesta_fk")
+	private List<Opcion> opciones = new LinkedList<>();
 	
 	public Encuesta() { // POJO
 		
@@ -76,7 +92,7 @@ public class Encuesta implements Identificable {
 	public void setCierre(LocalDateTime cierre) {
 		this.cierre = cierre;
 	}
-	public LinkedList<Opcion> getOpciones() {
+	public List<Opcion> getOpciones() {
 		return opciones;
 	}
 	public void setOpciones(LinkedList<Opcion> opciones) {
