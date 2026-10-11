@@ -2,8 +2,16 @@ package editorial.modelo;
 
 import java.time.LocalDate;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Publicacion {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 	private String titulo;
 	private Float precio;

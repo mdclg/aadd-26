@@ -5,6 +5,9 @@
         <class>editorial.modelo.Editorial</class>
         <class>editorial.modelo.Empleado</class>
         <class>editorial.modelo.Distribuidor</class>
+        <class>editorial.modelo.Publicacion</class>
+        <class>editorial.modelo.Libro</class>
+        <class>editorial.modelo.Revista</class>
        
         <properties>
             <property name="javax.persistence.jdbc.driver"

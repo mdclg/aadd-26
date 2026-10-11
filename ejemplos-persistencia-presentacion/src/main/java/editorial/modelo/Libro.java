@@ -3,9 +3,11 @@ package editorial.modelo;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+@Entity
 public class Libro extends Publicacion{
 	
 	private String isbn;

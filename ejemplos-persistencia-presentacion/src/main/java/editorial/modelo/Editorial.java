@@ -51,21 +51,20 @@ public class Editorial implements Serializable {
 	@Column(name = "telefono")
 	private List<String> telefonos;
 
-	@OneToMany(mappedBy = "editorial", cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "editorial", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Empleado> empleados;
 
 	@OneToOne
 	@JoinColumn(name = "director_fk")
 	private Empleado director;
 
-	/*
-	 * @ManyToMany
-	 * 
-	 * @JoinTable(name = "editorial_distribuidor", joinColumns = {
-	 * 
-	 * @JoinColumn(name = "editorial_fk") }, inverseJoinColumns = { @JoinColumn(name
-	 * = "distribuidor_fk") }) private List<Distribuidor> distribuidores;
-	 */
+	@ManyToMany
+
+	@JoinTable(name = "editorial_distribuidor", joinColumns = {
+
+			@JoinColumn(name = "editorial_fk") }, inverseJoinColumns = { @JoinColumn(name = "distribuidor_fk") })
+	private List<Distribuidor> distribuidores;
+
 	public Editorial() {
 
 	}
@@ -133,7 +132,6 @@ public class Editorial implements Serializable {
 		this.empleados = empleados;
 	}
 
-	
 	public Empleado getDirector() {
 		return director;
 	}
@@ -149,15 +147,19 @@ public class Editorial implements Serializable {
 	public void setTelefonos(List<String> telefonos) {
 		this.telefonos = telefonos;
 	}
-	/*
-	 * public void addDistribuidor(Distribuidor d) { if(distribuidores == null)
-	 * distribuidores = new ArrayList<>(); distribuidores.add(d); }
-	 * 
-	 * 
-	 * public List<Distribuidor> getDistribuidores() { return distribuidores; }
-	 * 
-	 * public void setDistribuidores(List<Distribuidor> distribuidores) {
-	 * this.distribuidores = distribuidores; }
-	 * 
-	 */
+
+	public void addDistribuidor(Distribuidor d) {
+		if (distribuidores == null)
+			distribuidores = new ArrayList<>();
+		distribuidores.add(d);
+	}
+
+	public List<Distribuidor> getDistribuidores() {
+		return distribuidores;
+	}
+
+	public void setDistribuidores(List<Distribuidor> distribuidores) {
+		this.distribuidores = distribuidores;
+	}
+
 }

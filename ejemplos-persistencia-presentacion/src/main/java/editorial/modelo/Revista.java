@@ -2,6 +2,9 @@ package editorial.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Revista extends Publicacion{
 
 	private String issn;
