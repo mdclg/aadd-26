@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Formulario de registro</title>
+</head>
+<body>
+	<form method="POST" action="RegistroServlet">
+		<div>
+			<label>Nombre:</label> <input name="nombre">
+		</div>
+		<br>
+		<br>
+		<div>
+			<label>Apellidos: </label> <input name="apellidos">
+		</div>
+		<br>
+		<br>
+		<div>
+			<label>Correo: </label> <input name="usermail">
+		</div>
+		<br>
+		<br>
+		<label for="usuario">Usuario:</label> <input id="usuario"
+			name="usuario" required maxlength="40"> <br>
+		<br> <label for="password">Contraseña:</label> <input
+			type="password" id="password" name="password" required minlength="8">
+		<br>
+		<br>
+
+		<button type="submit">Registrarse</button>
+	</form>
+	 <p><a href="login.html">Ya tengo una cuenta</a></p>
+</body>
+
+</html>
