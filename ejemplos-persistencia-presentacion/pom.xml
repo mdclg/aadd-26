@@ -6,7 +6,7 @@
 	<artifactId>ejemplos-persistencia-presentacion</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<properties>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -15,16 +15,12 @@
 	</properties>
 
 	<dependencies>
-		<!-- jetty -->
+		<!-- API Servlet aportada por jetty -->
 		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlets</artifactId>
-			<version>10.0.18</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>10.0.18</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- mysql-->
 		<dependency>
