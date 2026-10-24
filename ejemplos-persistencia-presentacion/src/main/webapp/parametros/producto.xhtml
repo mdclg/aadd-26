@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Producto</title>
+</h:head>
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{productoBean.productId}" />
+		<f:viewAction action="#{productoBean.loadProductData()}" />
+	</f:metadata>
+	<h:form>
+		<h1>Detalles del Producto</h1>
+
+		<h:outputText value="ID del Producto: #{productoBean.productId}" />
+		<br />
+		<h:outputText value="Nombre del Producto: #{productoBean.productName}" />
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Configuraciones</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h2>Configuración Global</h2>
+
+		<h:outputLabel value="Nombre de la Aplicación: " />
+		<h:outputText value="#{configuracionBean.getConfiguracion('appName')}" />
+		<br />
+		<h:outputLabel value="Versión: " />
+		<h:outputText value="#{configuracionBean.getConfiguracion('version')}" />
+		<br />
+		<h:outputLabel value="Máximo de Usuarios: " />
+		<h:outputText value="#{configuracionBean.getConfiguracion('maxUsers')}" />
+	</h:form>
+</h:body>
+</html>

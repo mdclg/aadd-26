@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Saludar</title>
+</h:head>
+<h:body>
+	<div>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Saludar a :" />
+				<h:inputText value="#{saludarBean.nombre}" />
+
+			</h:panelGrid>
+
+			<h:commandButton value="Saludar" actionListener="#{saludarBean.generarSaludo()}">
+			</h:commandButton>
+
+			<h:outputText value="#{saludarBean.mensaje}"
+				style="font-weight: bold; color: green;" />
+
+
+
+		</h:form>
+	</div>
+</h:body>
+</html>

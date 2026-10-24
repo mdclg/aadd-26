@@ -15,6 +15,22 @@
 	</properties>
 
 	<dependencies>
+		<!-- jsf -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-shaded</artifactId>
+			<version>3.1.9.Final</version>
+		</dependency>
 		<!-- API Servlet aportada por jetty -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

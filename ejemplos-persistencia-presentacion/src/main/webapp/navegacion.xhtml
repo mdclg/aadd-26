@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Origen</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputText value="Seleccione un método de navegación:" />
+
+        <br/>
+        <h:commandButton value="Navegar con FacesContext" action="#{navigationBean.navigateUsingFacesContext}" />
+
+         <br/>
+        <h:commandButton value="Navegar con action de commandButton" action="#{navigationBean.navigateUsingAction}" />
+
+         <br/>
+        <h:commandButton value="Navegar Directamente" action="destino.xhtml" />
+
+         <br/>
+        <h:commandLink action ="destino.xhtml" value="Link a destino"/> 
+
+         <br/>
+        <h:commandButton value="Redirigir a Página destino" action="#{navigationBean.redirectToPage}" />
+
+         <br/>
+        <h:commandButton value="Forward a página destino" action="#{navigationBean.forwardToPage}" />
+    </h:form>
+</h:body>
+</html>
