@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import encuestas.modelo.Encuesta;
+import encuestas.servicio.EncuestaResumen;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 import repositorio.RepositorioString;
@@ -27,10 +28,12 @@ public interface RepositorioEncuestasAdHoc extends RepositorioString<Encuesta> {
 	
 	public List<Encuesta> getBySinVotos() throws RepositorioException, EntidadNoEncontrada ;
 	
-	public List<Encuesta> getByNumeroOpcionesMayorQue(int numero);
+	public List<Encuesta> getByNumeroOpcionesMayorQue(int numero) throws RepositorioException;
 	
 	// ...
 	public List<Encuesta> getByVotante(String nombre);
 	public List<Object[]> getOpcionesPorVotos();
+	
+	public List<EncuestaResumen> getResumen() throws RepositorioException;
 	
 }

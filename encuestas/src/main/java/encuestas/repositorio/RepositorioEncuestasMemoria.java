@@ -19,6 +19,11 @@ public class RepositorioEncuestasMemoria extends RepositorioMemoria<Encuesta> {
 				LocalDateTime.now().plusDays(1), Arrays.asList("Opción 1", "Opción 2"));
 
 		this.add(encuesta);
+		
+		Encuesta encuesta2 = new Encuesta("Test 2", "Instrucciones", LocalDateTime.now().minusDays(1),
+				LocalDateTime.now().plusDays(1), Arrays.asList("Opción 3"));
+
+		this.add(encuesta2);
 
 	}
 

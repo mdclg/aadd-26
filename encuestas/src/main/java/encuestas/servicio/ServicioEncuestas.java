@@ -6,6 +6,8 @@ import java.util.List;
 
 import encuestas.modelo.Encuesta;
 import encuestas.modelo.Opcion;
+import encuestas.repositorio.RepositorioEncuestasAdHoc;
+import encuestas.repositorio.RepositorioEncuestasJPA;
 import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
@@ -13,7 +15,7 @@ import repositorio.RepositorioException;
 
 public class ServicioEncuestas implements IServicioEncuestas {
 
-	private Repositorio<Encuesta, String> repositorio = FactoriaRepositorios.getRepositorio(Encuesta.class);
+	private RepositorioEncuestasAdHoc repositorio = FactoriaRepositorios.getRepositorio(Encuesta.class);
 		
 	@Override
 	public String crear(String titulo, String instrucciones, LocalDateTime apertura, LocalDateTime cierre, List<String> opciones) throws RepositorioException {
@@ -122,6 +124,11 @@ public class ServicioEncuestas implements IServicioEncuestas {
 	@Override
 	public List<EncuestaResumen> getListadoResumen() throws RepositorioException, EntidadNoEncontrada {
 		
+		
+		
+		return repositorio.getResumen();
+		/*
+		
 		LinkedList<EncuestaResumen> resultado = new LinkedList<>();
 		
 		for (Encuesta encuesta : repositorio.getAll()) {
@@ -133,7 +140,7 @@ public class ServicioEncuestas implements IServicioEncuestas {
 			
 		}
 				
-		return resultado;
+		return resultado;*/
 	}
 
 }

@@ -5,6 +5,15 @@ public class EncuestaResumen {
 	private String id;
 	private String titulo;
 	
+	public EncuestaResumen() {
+		
+	}
+	
+	public EncuestaResumen(String id, String titulo) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+	}
 	public String getId() {
 		return id;
 	}

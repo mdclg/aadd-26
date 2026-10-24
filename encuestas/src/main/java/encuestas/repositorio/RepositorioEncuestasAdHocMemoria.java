@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import encuestas.modelo.Encuesta;
 import encuestas.modelo.Opcion;
+import encuestas.servicio.EncuestaResumen;
 import repositorio.RepositorioMemoria;
 
 public class RepositorioEncuestasAdHocMemoria extends RepositorioMemoria<Encuesta> implements RepositorioEncuestasAdHoc {
@@ -58,6 +59,23 @@ public class RepositorioEncuestasAdHocMemoria extends RepositorioMemoria<Encuest
 	public List<Object[]> getOpcionesPorVotos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<EncuestaResumen> getResumen() {
+
+		LinkedList<EncuestaResumen> resultado = new LinkedList<>();
+		
+		for (Encuesta encuesta : this.getAll()) {
+			EncuestaResumen resumen = new EncuestaResumen();
+			resumen.setId(encuesta.getId());
+			resumen.setTitulo(encuesta.getTitulo());
+			
+			resultado.add(resumen);
+			
+		}
+				
+		return resultado;
 	}
 
 }

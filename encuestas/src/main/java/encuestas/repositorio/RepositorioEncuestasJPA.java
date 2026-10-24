@@ -1,13 +1,30 @@
 package encuestas.repositorio;
 
-import encuestas.modelo.Encuesta;
-import repositorio.RepositorioJPA;
+import java.util.List;
+import java.util.Map;
 
-public class RepositorioEncuestasJPA  extends RepositorioJPA<Encuesta>{
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import encuestas.modelo.Encuesta;
+import encuestas.servicio.EncuestaResumen;
+import repositorio.EntidadNoEncontrada;
+import repositorio.RepositorioException;
+import repositorio.RepositorioJPA;
+import utils.EntityManagerHelper;
+
+public class RepositorioEncuestasJPA extends RepositorioJPA<Encuesta> {
 
 	@Override
 	public Class<Encuesta> getClase() {
 		return Encuesta.class;
 	}
+
+	
+	
+	
+	
+	
 
 }

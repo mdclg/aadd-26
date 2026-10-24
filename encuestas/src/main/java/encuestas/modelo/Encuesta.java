@@ -11,6 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -22,6 +27,25 @@ import utils.LocalDateTimeAdapter;
 
 @XmlRootElement // anotación JAXB
 @Entity
+@NamedEntityGraph(
+	    name = "Encuesta.conOpciones",
+	    attributeNodes = @NamedAttributeNode("opciones")
+	)
+@NamedEntityGraph(
+	    name = "Encuesta.conOpcionesYVotos",
+	    attributeNodes = @NamedAttributeNode(
+	        value = "opciones",
+	        subgraph = "opcionesSubgraph"
+	    ),
+	    subgraphs = @NamedSubgraph(
+	        name = "opcionesSubgraph",
+	        attributeNodes = @NamedAttributeNode("votos")
+	    )
+	)
+@NamedQueries({
+	@NamedQuery(name="Encuesta.conMinimoOpciones", 
+			query="SELECT e FROM Encuesta e WHERE SIZE(e.opciones) >= :num ")
+})
 public class Encuesta implements Identificable {
 	
 	@Id
@@ -36,8 +60,8 @@ public class Encuesta implements Identificable {
 	private LocalDateTime apertura;
 	
 	private LocalDateTime cierre;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "encuesta_fk")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "encuesta")
 	private List<Opcion> opciones = new LinkedList<>();
 	
 	public Encuesta() { // POJO

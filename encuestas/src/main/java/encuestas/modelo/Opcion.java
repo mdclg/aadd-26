@@ -1,7 +1,9 @@
 package encuestas.modelo;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -18,8 +20,8 @@ public class Opcion {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Integer id;
 	private String texto;
-	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> votos = new LinkedList<>();
+	@ElementCollection(fetch = FetchType.LAZY)
+	private Set<String> votos = new HashSet<>();
 	
 	public Opcion() { // POJO
 		
@@ -35,10 +37,10 @@ public class Opcion {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	public List<String> getVotos() {
+	public Set<String> getVotos() {
 		return votos;
 	}
-	public void setVotos(LinkedList<String> votos) {
+	public void setVotos(HashSet<String> votos) {
 		this.votos = votos;
 	}
 	
