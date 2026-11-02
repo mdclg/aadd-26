@@ -15,6 +15,12 @@
 	</properties>
 
 	<dependencies>
+		<!--primefaces-->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>15.0.6</version>
+		</dependency>
 		<!-- jsf -->
 		<dependency>
 			<groupId>org.glassfish</groupId>

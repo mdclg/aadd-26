@@ -1,0 +1,36 @@
+<ui:composition template="/WEB-INF/template/basicTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<ui:define name="title">
+	Carrito
+</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel for="item" value="Agregar Item:" />
+				<h:inputText id="item" value="#{carritoWeb.item}" />
+
+				<h:commandButton value="Agregar al Carrito"
+					actionListener="#{carritoWeb.agregarItem}">
+					<f:ajax execute="@form" render="carrito total" />
+				</h:commandButton>
+			</h:panelGrid>
+
+			<h2>Contenido del Carrito:</h2>
+			<h:dataTable value="#{carritoWeb.items}" var="c" id="carrito">
+				<h:column>
+					<h:outputText value="#{c}" />
+				</h:column>
+			</h:dataTable>
+
+			<h:outputText id="total" value="Número total: #{carritoWeb.cantidad}" />
+
+			<h:commandButton value="Limpiar Carrito"
+				actionListener="#{carritoWeb.limpiarCarrito}">
+				<f:ajax render="carrito total" />
+			</h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+    <!-- Definimos los atributos de entrada para el componente -->
+    <composite:attribute name="bean" required="true" 
+                         type="aadd.beans.composicion.BaseBuscadorWeb" /> <!-- El bean con la lógica de filtrado -->
+    <composite:attribute name="keyword" required="true" 
+                         type="java.lang.String" /> <!-- La palabra clave para la búsqueda -->
+</composite:interface>
+
+<composite:implementation>
+    <h:form>
+        <!-- Campo de búsqueda -->
+        <p:inputText id="keyword" value="#{cc.attrs.keyword}" 
+                     placeholder="Buscar..." />
+        <p:commandButton icon="pi pi-search" update="resultados" 
+                         actionListener="#{cc.attrs.bean.filtrar()}" />
+
+        <!-- Tabla de resultados filtrados -->
+        <p:dataTable id="resultados" var="item" 
+                     value="#{cc.attrs.bean.resultadosFiltrados}">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{item.nombre}" />
+            </p:column>
+            <p:column headerText="Descripción">
+                <h:outputText value="#{item.descripcion}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</composite:implementation>
+</html>
