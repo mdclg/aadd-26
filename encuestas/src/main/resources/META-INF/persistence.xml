@@ -24,11 +24,11 @@
 
             <property name="javax.persistence.jdbc.password"
 
-                value="practicas" />
+                value="root" />
 
             <property name="javax.persistence.jdbc.url"
 
-                value="jdbc:mysql://localhost:3306/encuestas?serverTimezone=CET" />
+                value="jdbc:mysql://localhost:3306/encuesta2?serverTimezone=CET" />
 
            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

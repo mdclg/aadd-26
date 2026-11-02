@@ -1,16 +1,14 @@
 package encuestas.servicio;
 
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
 
+import encuestas.dto.EncuestaDTO;
 import encuestas.modelo.Encuesta;
 import encuestas.modelo.Opcion;
 import encuestas.repositorio.RepositorioEncuestasAdHoc;
-import encuestas.repositorio.RepositorioEncuestasJPA;
 import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
-import repositorio.Repositorio;
 import repositorio.RepositorioException;
 
 public class ServicioEncuestas implements IServicioEncuestas {
@@ -101,14 +99,12 @@ public class ServicioEncuestas implements IServicioEncuestas {
 	}
 
 	@Override
-	public Encuesta getEncuesta(String id) throws RepositorioException, EntidadNoEncontrada {
-		
+	public EncuestaDTO getEncuesta(String id) throws RepositorioException, EntidadNoEncontrada {		
 		if (id == null || id.isEmpty())
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
 		
-		return repositorio.getById(id);
+		return transformToDTO(repositorio.getById(id));
 	}
-
 	@Override
 	public void eliminar(String id) throws RepositorioException, EntidadNoEncontrada {
 		
@@ -142,5 +138,9 @@ public class ServicioEncuestas implements IServicioEncuestas {
 				
 		return resultado;*/
 	}
+	
+	private EncuestaDTO transformToDTO(Encuesta encuesta) {        
+        return new EncuestaDTO(encuesta.getId(),encuesta.getInstrucciones(), encuesta.getTitulo(), encuesta.getApertura(),encuesta.getCierre());
+    }
 
 }

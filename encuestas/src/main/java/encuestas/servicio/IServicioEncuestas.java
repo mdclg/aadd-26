@@ -3,7 +3,7 @@ package encuestas.servicio;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import encuestas.modelo.Encuesta;
+import encuestas.dto.EncuestaDTO;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 
@@ -15,7 +15,7 @@ public interface IServicioEncuestas {
 	
 	void votar(String id, int opcion, String usuario) throws RepositorioException, EntidadNoEncontrada;
 	
-	Encuesta getEncuesta(String id) throws RepositorioException, EntidadNoEncontrada;
+	EncuestaDTO getEncuesta(String id) throws RepositorioException, EntidadNoEncontrada;
 	
 	void eliminar(String id) throws RepositorioException, EntidadNoEncontrada;
 	

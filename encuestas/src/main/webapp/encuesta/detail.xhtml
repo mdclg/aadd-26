@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Detalle encuesta</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{encuestaDetailBean.idEncuesta}" />
+		<f:viewAction action="#{encuestaDetailBean.load()}" />
+	</f:metadata>
+	<div>
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<h3>#{encuestaDetailBean.encuesta.titulo}</h3>
+		<p>#{encuestaDetailBean.encuesta.instrucciones}</p>
+		<p>Apertura: #{encuestaDetailBean.encuesta.apertura}</p>
+		<p>Cierre: #{encuestaDetailBean.encuesta.cierre}</p>
+
+	</div>
+</h:body>
+</html>
