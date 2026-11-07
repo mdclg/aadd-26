@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h:head>
+		<meta charset="utf-8" />		
+		<title><ui:insert name="title" /></title>
+		<h:outputStylesheet name="assets/css/main.css" />	
+	</h:head>
+	<h:body class="homepage is-preload">
+        
+        <ui:insert name="metadata" />
+        
+		<div id="page-wrapper">
+			<section id="header">
+			<h1>
+				<a href="#{request.contextPath}/index.xhtml">ENCUESTAS</a>
+			</h1>
+			<!-- Nav --> <nav id="nav">
+			<ul>
+				<li class="#{estilo1}"><a
+					href="#{request.contextPath}/index.xhtml">Inicio</a>
+                </li>
+				
+				<li class="#{estilo2}"><a href="#{request.contextPath}/encuesta/alta.xhtml">Crear
+								encuesta</a>
+				</li>				
+	
+			</ul>
+			</nav> </section>
+			<section id="main">
+			<div class="container">
+				<ui:insert name="content" />
+			</div>
+			</section>
+			<ui:include src="/WEB-INF/template/footer.xhtml" />
+		</div>
+
+		<h:outputScript library="primefaces" name="jquery/jquery.js" />
+		<h:outputScript name="assets/js/jquery.dropotron.min.js" />
+		<h:outputScript name="assets/js/browser.min.js" />
+		<h:outputScript name="assets/js/breakpoints.min.js" />
+		<h:outputScript name="assets/js/util.js" />
+		<h:outputScript name="assets/js/main.js" />
+	</h:body>
+</html>

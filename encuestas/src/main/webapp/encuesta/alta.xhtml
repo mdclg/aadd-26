@@ -1,47 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Alta nueva encuesta</title>
-</h:head>
-<h:body>
-	<div>
-		<h:form>
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Título" />
-				<p:inputText value="#{altaEncuestaBean.titulo}" />
-				<p:outputLabel value="Instrucciones" />
-				<p:inputTextarea value="#{altaEncuestaBean.instrucciones}" rows="5"
-					cols="50" />
-				<p:outputLabel value="Fecha de apertura" />
-				<p:datePicker value="#{altaEncuestaBean.apertura}" locale="es"
-					monthNavigator="true" pattern="dd-MM-yyyy"
-					hideOnDateTimeSelect="true" showTime="false" />
-				<p:outputLabel value="Fecha de cierre" />
-				<p:datePicker value="#{altaEncuestaBean.cierre}" locale="es"
-					monthNavigator="true" pattern="dd-MM-yyyy"
-					hideOnDateTimeSelect="true" showTime="false" />
-				<p:outputLabel value="Opción" />
-				<p:inputText value="#{altaEncuestaBean.nuevaOpcion}" />
-				<p:commandButton value="Añadir opción" icon="pi pi-plus-circle"
-					actionListener="#{altaEncuestaBean.addOpcion()}"
-					update="opciones @previous" />
-			</h:panelGrid>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-			<p:dataTable id="opciones" var="opcion"
-				value="#{altaEncuestaBean.opciones}">
-				<p:column headerText="Texto">
-					<h:outputText value="#{opcion}" />
-				</p:column>
-			</p:dataTable>
-			<p:commandButton value="Alta" icon="pi pi-check-circle"
-				actionListener="#{altaEncuestaBean.altaEncuesta()}" update="growl" />
-				<p:growl id="growl" showDetail="true" />
-		</h:form>
-	</div>
-</h:body>
-</html>
+	<ui:define name="title">
+		Alta nueva encuesta
+	</ui:define>
+
+	<ui:param name="estilo2" value="current" />
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-12">
+				<div class="content">
+					<h:form>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Título" />
+							<p:inputText value="#{altaEncuestaBean.titulo}" />
+							<p:outputLabel value="Instrucciones" />
+							<p:inputTextarea value="#{altaEncuestaBean.instrucciones}"
+								rows="5" cols="50" />
+							<p:outputLabel value="Fecha de apertura" />
+							<p:datePicker value="#{altaEncuestaBean.apertura}" locale="es"
+								monthNavigator="true" pattern="dd-MM-yyyy"
+								hideOnDateTimeSelect="true" showTime="false" />
+							<p:outputLabel value="Fecha de cierre" />
+							<p:datePicker value="#{altaEncuestaBean.cierre}" locale="es"
+								monthNavigator="true" pattern="dd-MM-yyyy"
+								hideOnDateTimeSelect="true" showTime="false" />
+							<p:outputLabel value="Opción" />
+							<p:inputText value="#{altaEncuestaBean.nuevaOpcion}" />
+							<p:commandButton value="Añadir opción" icon="pi pi-plus-circle"
+								actionListener="#{altaEncuestaBean.addOpcion()}"
+								update="opciones @previous" />
+						</h:panelGrid>
+
+						<p:dataTable id="opciones" var="opcion"
+							value="#{altaEncuestaBean.opciones}">
+							<p:column headerText="Texto">
+								<h:outputText value="#{opcion}" />
+							</p:column>
+						</p:dataTable>
+						<p:commandButton value="Alta" icon="pi pi-check-circle"
+							actionListener="#{altaEncuestaBean.altaEncuesta()}"
+							update="growl panel" oncomplete="PF('resultadoAlta').show()" />
+						<p:growl id="growl" showDetail="true" />
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<p:dialog header="Información" widgetVar="resultadoAlta" width="40vw"
+			height="10vh" modal="true" responsive="true" closable="false"
+			contentStyle="overflow: hidden; padding: 20px; text-align: center;">
+			<p:outputPanel id="panel" style="width: 100%;">
+				<p:staticMessage rendered="#{altaEncuestaBean.error}"
+					severity="error" detail="La encuesta no se ha podido crear"
+					style="width: 90%" />
+				<p:staticMessage rendered="#{!altaEncuestaBean.error}"
+					severity="info" detail="Encuesta creada correctamente"
+					style="width: 90%" />
+
+				<p:commandButton type="button" value="Cerrar"
+					rendered="#{altaEncuestaBean.error}"
+					onclick="PF('resultadoAlta').hide()" style="margin-top:5px" />
+				<p:linkButton outcome="detail" value="Ir al detalle"
+					style="margin-top:5px;" rendered="#{!altaEncuestaBean.error}">
+					<f:param name="id" value="#{altaEncuestaBean.idEncuesta}" />
+				</p:linkButton>
+			</p:outputPanel>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

@@ -30,28 +30,35 @@ public class AltaEncuestaBean implements Serializable {
 	
 	@Inject
 	private FacesContext facesContext;
+	
+	private String idEncuesta;
+	
+	private boolean error;
 
 	public AltaEncuestaBean() {
 		servicioEncuestas = FactoriaServicios.getServicio(IServicioEncuestas.class);
+		error = false;
 	}
 
 	public void altaEncuesta() {
 		// comprobación de campos
 
 		try {
-			String resultado = servicioEncuestas.crear(titulo, instrucciones, apertura, cierre, opciones);
+			idEncuesta = servicioEncuestas.crear(titulo, instrucciones, apertura, cierre, opciones);
 
-			try {
+			//try {
 				facesContext.addMessage(null,
-		                new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Encuesta "+resultado+" creada correctamente"));
-				facesContext.getExternalContext().getFlash().setKeepMessages(true);
-			    facesContext.getExternalContext().redirect("detail.xhtml?id="+resultado);
-			} catch (IOException e) {
+		                new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Encuesta "+idEncuesta+" creada correctamente"));
+				error = false;
+				//facesContext.getExternalContext().getFlash().setKeepMessages(true);
+			    //facesContext.getExternalContext().redirect("detail.xhtml?id="+resultado);
+			/*} catch (IOException e) {
 			    facesContext.addMessage(null,
 								new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se ha podido navegar"));
 			    e.printStackTrace();
-			}
+			}*/
 		} catch (Exception e) {
+			error = true;
 			facesContext.addMessage(null,
 	                new FacesMessage(FacesMessage.SEVERITY_ERROR, "", e.getMessage()));
 			e.printStackTrace();
@@ -110,4 +117,14 @@ public class AltaEncuestaBean implements Serializable {
 	public void setNuevaOpcion(String nuevaOpcion) {
 		this.nuevaOpcion = nuevaOpcion;
 	}
+
+	public String getIdEncuesta() {
+		return idEncuesta;
+	}
+
+	public boolean isError() {
+		return error;
+	}
+	
+	
 }

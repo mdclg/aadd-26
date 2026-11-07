@@ -1,28 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Detalle encuesta</title>
-</h:head>
-<h:body>
-	<f:metadata>
-		<f:viewParam name="id" value="#{encuestaDetailBean.idEncuesta}" />
-		<f:viewAction action="#{encuestaDetailBean.load()}" />
-	</f:metadata>
-	<div>
-		<p:messages id="messages" showDetail="true" closable="true">
-			<p:autoUpdate />
-		</p:messages>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-		<h3>#{encuestaDetailBean.encuesta.titulo}</h3>
-		<p>#{encuestaDetailBean.encuesta.instrucciones}</p>
-		<p>Apertura: #{encuestaDetailBean.encuesta.apertura}</p>
-		<p>Cierre: #{encuestaDetailBean.encuesta.cierre}</p>
+	<ui:define name="title">
+		Detalle encuesta
+	</ui:define>
 
-	</div>
-</h:body>
-</html>
+	<ui:define name="metadata">
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{encuestaDetailBean.idEncuesta}" />
+			<f:viewAction action="#{encuestaDetailBean.load()}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-12">
+				<div class="content">
+					<h:form id="encuestas">
+
+						<p:messages id="messages" showDetail="true" closable="true">
+							<p:autoUpdate />
+						</p:messages>
+
+						<p:panel header="#{encuestaDetailBean.encuesta.titulo}">
+							<p class="m-0">#{encuestaDetailBean.encuesta.instrucciones}</p>
+							<p>Apertura: #{encuestaDetailBean.encuesta.apertura}</p>
+							<p>Cierre: #{encuestaDetailBean.encuesta.cierre}</p>
+						</p:panel>
+
+						
+						Usuario: <p:inputText value="#{encuestaDetailBean.usuario}" />
+						Votar: 
+						<p:selectOneRadio id="opcion" value="#{encuestaDetailBean.opcion}"
+							layout="pageDirection">
+							<f:selectItems value="#{encuestaDetailBean.encuesta.opciones}"
+								var="o" itemLabel="#{o}" itemValue="#{o}" />
+						</p:selectOneRadio>
+
+						<p:toolbarGroup>
+							<p:commandButton value="Votar"
+								actionListener="#{encuestaDetailBean.votar()}" update="messages"></p:commandButton>
+						</p:toolbarGroup>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

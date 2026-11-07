@@ -140,7 +140,9 @@ public class ServicioEncuestas implements IServicioEncuestas {
 	}
 	
 	private EncuestaDTO transformToDTO(Encuesta encuesta) {        
-        return new EncuestaDTO(encuesta.getId(),encuesta.getInstrucciones(), encuesta.getTitulo(), encuesta.getApertura(),encuesta.getCierre());
+        EncuestaDTO encuestaDTO = new EncuestaDTO(encuesta.getId(),encuesta.getInstrucciones(), encuesta.getTitulo(), encuesta.getApertura(),encuesta.getCierre());
+        encuesta.getOpciones().forEach(opcion -> encuestaDTO.addOpcion(opcion.getTexto()));
+        return encuestaDTO;
     }
 
 }
