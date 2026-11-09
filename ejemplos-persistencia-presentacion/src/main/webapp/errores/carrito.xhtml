@@ -11,12 +11,14 @@
 <h:body>
   <p:growl id="growl" showDetail="true" />
     <h:form>
+    
+    <h2>#{AutoriaBean.autor}</h2>
+    		
    
     <h:panelGrid columns="2">
     		
-    		<h2>#{AutoriaBean.autor}</h2>
     		
-    		<h:outputLabel for="fecha" value="#{textlocale.addItem}" />
+    		<h:outputLabel for="fecha" value="Fecha" />
             <p:datePicker value="#{carritoErroresBean.fecha}" locale="es"
 					monthNavigator="true" pattern="dd-MM-yyyy"
 					hideOnDateTimeSelect="true" showTime="false" />
