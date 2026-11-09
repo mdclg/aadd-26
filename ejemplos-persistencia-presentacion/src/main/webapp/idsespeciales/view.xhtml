@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Ejemplos de Identificadores en JSF</title>
+</h:head>
+<h:body>
+	<h:form id="myForm">
+
+		<!-- Ejemplo @this -->
+		<div style="margin-bottom: 5px">
+			<h:panelGroup id="panelThis">
+				<h:outputLabel for="inputThis" value="Ejemplo @this: " />
+				<h:inputText id="inputThis" value="#{identificadoresBean.text1}">
+					<f:ajax event="keyup" listener="#{identificadoresBean.changeText()}"
+						render="@this" />
+				</h:inputText>
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @form -->
+			<h:panelGroup id="panelForm">
+				<h:outputLabel for="inputForm" value="Ejemplo @form: " />
+				<h:inputText id="inputForm" value="#{identificadoresBean.text2}">
+					<f:ajax event="keyup" render="@form" />
+				</h:inputText>
+				<h:outputText id="outputForm" value="#{identificadoresBean.text2}" />
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @all -->
+			<h:panelGroup id="panelAll">
+				<h:outputLabel for="inputAll" value="Ejemplo @all: " />
+				<h:inputText id="inputAll" value="#{identificadoresBean.text3}">
+					<f:ajax event="keyup" render="@all" />
+				</h:inputText>
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @none -->
+			<h:panelGroup id="panelNone">
+				<h:outputLabel for="inputNone" value="Ejemplo @none: " />
+				<h:inputText id="inputNone" value="#{identificadoresBean.text4}">
+					<f:ajax event="keyup" render="@none" />
+				</h:inputText>
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @parent -->
+			<h:panelGroup id="panelParent">
+				<p:panel header="#{identificadoresBean.text4}">
+					<h:outputLabel for="inputParent" value="Ejemplo @parent: " />
+					<h:inputText id="inputParent" value="#{identificadoresBean.text5}">
+						<f:ajax event="keyup" render="@parent" />
+					</h:inputText>
+				</p:panel>
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @child(index) -->
+			<h:panelGroup id="parentGroup">
+				<h:outputText id="hijo0" value="Hijo 0: #{identificadoresBean.text6}" style="margin-right:10px" />
+				<h:outputText id="hijo1" value="Hijo 1: #{identificadoresBean.text6}" />
+				<br/>
+				<h:commandButton value="Actualizar Hijo 1">
+					<f:ajax render="parentGroup:@child(1)" />
+				</h:commandButton>
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @next -->
+			<h:panelGroup id="panelNext">
+				<h:outputLabel for="inputNext" value="Ejemplo @next: " />
+				<h:inputText id="inputNext" value="#{identificadoresBean.text7}" style="margin-right:10px"/>
+				
+				<h:commandButton value="Actualizar Siguiente" style="margin-right:10px">
+					<f:ajax render="@next" execute="inputNext" />
+				</h:commandButton>
+				<h:outputText id="outputNext" value="#{identificadoresBean.text7}" />
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @previous -->
+			<h:panelGroup id="panelPrevious">
+				<h:outputLabel for="inputPrevious" value="Ejemplo @previous: " />
+				<h:inputText id="inputPrevious" value="#{identificadoresBean.text8}" />
+				<h:commandButton value="Actualizar Anterior">
+					<f:ajax render="@previous" />
+				</h:commandButton>
+			</h:panelGroup>
+		</div>
+
+		<div style="margin-bottom: 5px">
+			<!-- Ejemplo @namingcontainer -->
+			<h:panelGroup id="panelNamingContainer">
+				<h:outputLabel for="inputNamingContainer"
+					value="Ejemplo @namingcontainer: " />
+				<h:inputText id="inputNamingContainer"
+					value="#{identificadoresBean.text9}" />
+				<h:commandButton value="Actualizar NamingContainer">
+					<f:ajax render="@namingcontainer" />
+				</h:commandButton>
+			</h:panelGroup>
+		</div>
+
+		
+
+		
+
+	</h:form>
+</h:body>
+</html>

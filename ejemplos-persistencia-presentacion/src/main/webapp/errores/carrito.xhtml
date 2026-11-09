@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:p="http://primefaces.org/ui"     
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Carrito</title>
+</h:head>
+<h:body>
+  <p:growl id="growl" showDetail="true" />
+    <h:form>
+   
+    <h:panelGrid columns="2">
+    		
+    		<h2>#{AutoriaBean.autor}</h2>
+    		
+    		<h:outputLabel for="fecha" value="#{textlocale.addItem}" />
+            <p:datePicker value="#{carritoErroresBean.fecha}" locale="es"
+					monthNavigator="true" pattern="dd-MM-yyyy"
+					hideOnDateTimeSelect="true" showTime="false" />
+            
+            <h:outputLabel for="item" value="#{textlocale.addItem}" />
+            <h:inputText id="item" value="#{carritoErroresBean.item}" />
+            
+            <h:commandButton value="#{textlocale.addCart}" actionListener="#{carritoErroresBean.agregarItem}" >
+                <f:ajax execute="@form" render="carrito total" />
+            </h:commandButton>
+        </h:panelGrid>
+
+        <h2>#{textlocale.cartContent}</h2>
+        <h:dataTable value="#{carritoErroresBean.items}" var="c" id="carrito" rendered="#{carritoErrresBean.items.size() gt 0}">
+            <h:column>
+                <h:outputText value="#{c}" />
+            </h:column>
+        </h:dataTable>
+
+        <h:outputText id="total" value="#{textlocale.totalNumber} #{carritoErroresBean.cantidad}" />
+          <h:commandButton value="#{textlocale.cleanCart}" actionListener="#{carritoErroresBean.limpiarCarrito}">
+            <f:ajax render="carrito total growl" />
+        </h:commandButton>
+       
+    </h:form>
+   
+        
+        <p:commandButton value="Terminar pedido" icon="pi pi-check-circle"
+			actionListener="#{carritoErroresBean.hacerPedido()}"
+			update="growl" oncomplete="PF('resultado').show()" />
+        
+        <p:dialog header="Información" widgetVar="resultado" width="40vw"
+			height="10vh" modal="true" responsive="true" closable="false"
+			contentStyle="overflow: hidden; padding: 20px; text-align: center;">
+
+			<p:outputPanel id="panel" style="width: 100%;">
+				<p:staticMessage rendered="#{carritoErroresBean.error}"
+					severity="error" detail="No se ha podido hacer el pedido"
+					style="width: 90%" />
+
+				<p:staticMessage rendered="#{!carritoErroresBean.error}"
+					severity="info" detail="Pedido creado correctamente"
+					style="width: 90%" />
+
+				<p:commandButton type="button" value="Cerrar" rendered="#{carritoErroresBean.error}"
+					onclick="PF('resultado').hide()" style="margin-top:5px" />
+
+				
+
+			</p:outputPanel>
+
+		</p:dialog>
+    
+</h:body>
+</html>
+    

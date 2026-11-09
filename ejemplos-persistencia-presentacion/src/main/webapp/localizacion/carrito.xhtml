@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:p="http://primefaces.org/ui"     
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Carrito</title>
+</h:head>
+<h:body>
+    <h:form>
+     <p:growl id="growl" showDetail="true" />
+    <h:panelGrid columns="2">
+            <h:outputLabel for="item" value="#{textlocale.addItem}" />
+            <h:inputText id="item" value="#{carritoBean.item}" />
+            
+            <h:commandButton value="#{textlocale.addCart}" actionListener="#{carritoBean.agregarItem}" >
+                <f:ajax execute="@form" render="carrito total" />
+            </h:commandButton>
+        </h:panelGrid>
+
+        <h2>#{textlocale.cartContent}</h2>
+        <h:dataTable value="#{carritoBean.items}" var="c" id="carrito">
+            <h:column>
+                <h:outputText value="#{c}" />
+            </h:column>
+        </h:dataTable>
+
+        <h:outputText id="total" value="#{textlocale.totalNumber} #{carritoBean.cantidad}" />
+        
+        <h:commandButton value="#{textlocale.cleanCart}" actionListener="#{carritoBean.limpiarCarrito}">
+            <f:ajax render="carrito total growl" />
+        </h:commandButton>
+    </h:form>
+</h:body>
+</html>
+    

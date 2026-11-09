@@ -1,0 +1,66 @@
+<ui:composition template="/WEB-INF/template/basicTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+	<ui:define name="title">Chat</ui:define>
+
+	<ui:define name="content">
+
+		<o:socket channel="pushContext" onmessage="socketListener"/>
+
+		<h:form id="prueba">
+
+			<h:panelGrid columns="2">
+
+				<h:outputLabel for="username" value="Nombre usuario:" />
+
+				<p:inputText id="username" value="#{webSocketController.userName}" />
+
+				<h:outputLabel for="chatWindow" value="Ventana de chat:" />
+
+				<p:inputTextarea readonly="true" id="chatWindow" rows="10">
+				</p:inputTextarea>
+
+				<h:outputLabel for="chatInput" value="Escriba su mensaje:" />
+
+				<p:inputText id="chatInput" value="#{webSocketController.message}" />
+
+				<h:panelGroup />
+
+
+				<p:commandButton
+					actionListener="#{webSocketController.sendMessage()}"
+					value="Enviar" update="chatInput">
+				</p:commandButton>
+
+			</h:panelGrid>
+
+		</h:form>
+
+
+		<script type="text/javascript">
+			function socketListener(message, channel, event) {
+
+				console.log("socketListener se invoca");
+				var textArea = document.getElementById('prueba:chatWindow');
+				var textAreaValue = textArea.value;
+
+				if (textAreaValue.trim() !== '') {
+					textAreaValue += "\n";
+				}
+
+				textAreaValue += message;
+				textArea.value = textAreaValue;
+				textArea.scrollTop = textArea.scrollHeight;
+
+			}
+		</script>
+
+	</ui:define>
+
+</ui:composition>
