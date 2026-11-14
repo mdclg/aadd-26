@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "colors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "code": {
+            "type": "object",
+            "properties": {
+              "rgba": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "hex": {
+                "type": "string",
+                "pattern": "^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$"
+              }
+            },
+            "required": ["rgba", "hex"]
+          }
+        },
+        "required": ["color", "category", "code"]
+      }
+    }
+  },
+  "required": ["colors"]
+}
