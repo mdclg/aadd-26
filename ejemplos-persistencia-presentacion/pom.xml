@@ -15,8 +15,14 @@
 	</properties>
 
 	<dependencies>
-	
-	<!-- websockets de omnifaces-->
+		<!-- mongodb -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-sync</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+
+		<!-- websockets de omnifaces-->
 
 		<dependency>
 			<groupId>org.omnifaces</groupId>
