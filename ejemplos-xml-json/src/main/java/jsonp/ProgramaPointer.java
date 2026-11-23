@@ -14,20 +14,21 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonGeneratorFactory;
 
 public class ProgramaPointer {
+
 	public static void main(String[] args) throws Exception {
 
 		JsonReader reader = Json.createReader(new FileReader("json/colores.json"));
 		JsonObject jsonObj = reader.readObject();
 
-		JsonPointer jsonPointer = Json.createPointer("/colors/1/color");
-		JsonString jsonString = (JsonString) jsonPointer.getValue(jsonObj);
+		JsonPointer pointer = Json.createPointer("/colors/1/color");
+		JsonString jsonString = (JsonString) pointer.getValue(jsonObj);
 		System.out.println(jsonString.getString());
 
-		JsonPointer jsonPointer2 = Json.createPointer("/colors/1/type");
-		boolean found = jsonPointer2.containsValue(jsonObj);
+		pointer = Json.createPointer("/colors/1/type");
+		boolean found = pointer.containsValue(jsonObj);
 		System.out.println(found);
 
-		JsonPointer pointer = Json.createPointer("/colors/1/color");
+		pointer = Json.createPointer("/colors/1/color");
 		JsonObject modificado = pointer.replace(jsonObj, Json.createValue("blue"));
 
 		pointer = Json.createPointer("/colors/1/code/rgba/0");
@@ -37,7 +38,7 @@ public class ProgramaPointer {
 		modificado = pointer.remove(modificado);
 
 		pointer = Json.createPointer("/colors/1/brillo");
-		modificado = pointer.add(jsonObj, JsonValue.FALSE);
+		modificado = pointer.add(modificado, JsonValue.FALSE);
 
 		// Almacenamiento en disco
 
@@ -54,4 +55,5 @@ public class ProgramaPointer {
 		System.out.println("fin.");
 
 	}
+
 }
